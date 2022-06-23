@@ -34,9 +34,10 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 			Collector<Alert> collector) throws Exception {
 
 		long now = System.currentTimeMillis();
-		long diff =  transaction.getEventTimestamp()- now;
+		double diff =  (now - transaction.getEventTimestamp())/1000.0;
 		index = index +1;
-		if(adwin.setInput(transaction.getAmount())){
+		System.out.println("diff: "+String.valueOf(diff));
+		if(adwin.setInput(diff)){
 			//Input data into Adwin
 			System.out.println("Change Detected: "+String.valueOf(index));
 

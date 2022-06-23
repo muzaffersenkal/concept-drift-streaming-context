@@ -103,7 +103,7 @@ async def websocket_endpoint(websocket: WebSocket):
         payload["type"] = "data"
         file_path = '../conceptdrift/Data/output.csv' #choose your file path
         with open(file_path, "a") as output_file:
-            millisecond = datetime.datetime.now()
+            millisecond = datetime.datetime.now() - datetime.timedelta(seconds=payload["value"])
             unixtimestamp = int(time.mktime(millisecond.timetuple()) * 1000)
             output_file.write(str(unixtimestamp)+","+str(payload['value'])+ "\n")
         #if STREAM_STARTED:

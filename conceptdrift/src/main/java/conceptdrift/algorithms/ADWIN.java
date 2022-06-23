@@ -20,7 +20,7 @@ package conceptdrift.algorithms;
  *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-import moa.core.SizeOf;
+import conceptdrift.utils.SizeOf;
 
 public class ADWIN { //extends Estimator {
 

@@ -68,6 +68,7 @@ public class FileObserverSource implements SourceFunction<Transaction> {
         catch (IOException ioe)
         {
             ioe.printStackTrace();
+
         }
 
     }

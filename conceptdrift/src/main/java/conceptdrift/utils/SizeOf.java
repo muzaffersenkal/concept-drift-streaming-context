@@ -18,7 +18,7 @@
  * SizeOf.java
  * Copyright (C) 2009 University of Waikato, Hamilton, New Zealand
  */
-package moa.core;
+package conceptdrift.utils;
 
 import sizeof.agent.SizeOfAgent;
 
