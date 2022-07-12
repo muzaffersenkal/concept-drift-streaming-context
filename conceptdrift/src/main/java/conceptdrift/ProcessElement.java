@@ -40,9 +40,10 @@ public class ProcessElement extends ProcessWindowFunction<Transaction, Tuple3<Ti
         long count = 0L;
         for (Transaction e : iterable) {
             count++;
+            // System.out.println(e.getLatency());
         }
         TOTAL = TOTAL + count;
-        System.out.println("Num elements in Window ("+context.window().getStart()+","+context.window().getEnd()+") is "+count+" TOTAL="+TOTAL);
+        // System.out.println("Num elements in Window (started="+context.window().getStart()+", end="+context.window().getEnd()+") is "+count+" TOTAL="+TOTAL);
         collector.collect(new Tuple3<>(context.window(), Long.valueOf(count), context.currentWatermark() - context.window().getEnd()));
     }
 }

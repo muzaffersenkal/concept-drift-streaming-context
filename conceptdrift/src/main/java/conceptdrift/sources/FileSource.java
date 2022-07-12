@@ -16,11 +16,6 @@ public class FileSource implements SourceFunction<Transaction> {
     private String filePath;
 
 
-
-    private Random random = new Random();
-
-
-
     public FileSource(String path)
     {
         filePath = path;
@@ -40,20 +35,19 @@ public class FileSource implements SourceFunction<Transaction> {
             while (running && line != null)
             {
                 Transaction se;
-                long eventTimestamp; float temperature;
+                long eventTimestamp; float amount;
+                long ingestionTime = System.currentTimeMillis();
                 String[] data = line.split(",");
 
                 eventTimestamp = Long.parseLong(data[0]);
-                // temperature = Math.round(((random.nextGaussian()*5)+20)*100.0)/100.0;
-                temperature = Float.parseFloat(data[1]);
+                amount = Float.parseFloat(data[1]);
                 if (firstTimestamp == 0)
                 {
                     firstTimestamp = eventTimestamp;
                 }
-                se = new Transaction(1, firstIngestionTime + (eventTimestamp - firstTimestamp), temperature);
+                se = new Transaction(1, ingestionTime, firstIngestionTime + (eventTimestamp - firstTimestamp), amount);
 
                 sourceContext.collect(se);
-                //sourceContext.collectWithTimestamp(se, se.getIngestionTimestamp());
 
                 line = reader.readLine();
             }

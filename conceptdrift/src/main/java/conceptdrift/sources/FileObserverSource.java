@@ -13,13 +13,19 @@ public class FileObserverSource implements SourceFunction<Transaction> {
 
 
     private boolean running=true;
+    private boolean syncEventTime = false;
     private String filePath;
 
 
 
     private Random random = new Random();
 
+    public FileObserverSource(String path, boolean fixTime)
+    {
+        filePath = path;
+        syncEventTime = fixTime;
 
+    }
 
     public FileObserverSource(String path)
     {
@@ -44,23 +50,24 @@ public class FileObserverSource implements SourceFunction<Transaction> {
 
                     Thread.sleep(100);//waiting till the new content
                 } else {
-                    Transaction se;
+                    Transaction event;
+                    long ingestionTimestamp = System.currentTimeMillis();
                     long eventTimestamp;
-                    float temperature;
+                    float amount;
                     String[] data = line.split(",");
 
                     eventTimestamp = Long.parseLong(data[0]);
-                    // temperature = Math.round(((random.nextGaussian()*5)+20)*100.0)/100.0;
-                    temperature = Float.parseFloat(data[1]);
+
+                    amount = Float.parseFloat(data[1]);
                     if (firstTimestamp == 0) {
                         firstTimestamp = eventTimestamp;
                     }
-                    se = new Transaction(1, firstIngestionTime + (eventTimestamp - firstTimestamp), temperature);
-
-                    sourceContext.collect(se);
-                    //sourceContext.collectWithTimestamp(se, se.getIngestionTimestamp());
-
-
+                    // for batch jobs
+                    if(syncEventTime){
+                        eventTimestamp = firstIngestionTime + (eventTimestamp - firstTimestamp);
+                    }
+                    event = new Transaction(1, ingestionTimestamp, eventTimestamp, amount);
+                    sourceContext.collect(event);
                 }
             }
             reader.close();

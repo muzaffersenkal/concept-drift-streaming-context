@@ -1,20 +1,28 @@
 package conceptdrift;
 
 
+import conceptdrift.utils.SimpleDateFormatter;
+
 import java.util.Objects;
 
 public final class Transaction {
     private long accountId;
     private long eventTimestamp;
-    private float amount;
+    private long ingestionTimestamp;
+    private double amount;
 
     public Transaction() {
     }
 
-    public Transaction(long accountId, long eventTimestamp, float amount) {
+    public Transaction(long accountId, long ingestionTimestamp, long eventTimestamp, double amount) {
         this.accountId = accountId;
         this.eventTimestamp = eventTimestamp;
+        this.ingestionTimestamp = ingestionTimestamp;
         this.amount = amount;
+    }
+
+    public double getLatency(){
+        return (ingestionTimestamp - eventTimestamp)/1000.0;
     }
 
     public long getAccountId() {
@@ -25,15 +33,19 @@ public final class Transaction {
         this.accountId = accountId;
     }
 
+
     public long getEventTimestamp() {
         return this.eventTimestamp;
+    }
+    public long getIngestionTimestamp() {
+        return this.ingestionTimestamp;
     }
 
     public void setTimestamp(long timestamp) {
         this.eventTimestamp = timestamp;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return this.amount;
     }
 
@@ -47,7 +59,7 @@ public final class Transaction {
     }
 
     public String toString() {
-        return "Event{accountId=" + this.accountId + ", timestamp=" + this.eventTimestamp + ", amount=" + this.amount + '}';
+        return "Event{ingestionTime=" + SimpleDateFormatter.toDate(this.ingestionTimestamp) + ", eventTime=" + SimpleDateFormatter.toDate(this.eventTimestamp) + ", latency=" + this.getLatency() + '}';
     }
 
 
