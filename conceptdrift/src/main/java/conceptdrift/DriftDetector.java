@@ -13,11 +13,6 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 
 	private boolean apiAlert = false;
 	private static final long serialVersionUID = 1L;
-	private static final double SMALL_AMOUNT = 1.00;
-	private static final double LARGE_AMOUNT = 500.00;
-	private static final long ONE_MINUTE = 60 * 1000;
-	private transient ADWIN adwin;
-	private transient GeometricMovingAverageDM geo;
 	private transient ApiService api;
 	private int index = 0;
 	public transient AbstractDetectorAlgorithm detector;
@@ -53,12 +48,10 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 			Context context,
 			Collector<Alert> collector) throws Exception {
 
-		long now = System.currentTimeMillis();
 		double latency =  transaction.getLatency();
 		index = index + 1;
 		detector.input(latency);
 		if(detector.getChange()){
-			//Input data into Adwin
 			System.out.println("Change Detected: "+String.valueOf(index) +" " + transaction.toString());
 			Alert alert = new Alert();
 			alert.setId(index);
@@ -67,26 +60,9 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 			if(apiAlert){
 				api.sendDrift(detector.name,transaction.getEventTimestamp(), transaction.getIngestionTimestamp());
 			}
-			// do not forget to reset adwin
+			// do not forget to reset detector
 			detector.resetLearning();
 		}
-
-		/*
-		geo.input(diff);
-		if(geo.getChange()) {
-			//Input data into Adwin
-			System.out.println("Change Detected: " + String.valueOf(index));
-
-			Alert alert = new Alert();
-			alert.setId(transaction.getEventTimestamp());
-			alert.setDateTime(transaction.getEventTimestamp());
-			collector.collect(alert);
-			api.sendDrift("Adwin",now, now);
-			// do not forget to reset adwin
-			geo.resetLearning();
-
-		}
-		*/
 
 
 
