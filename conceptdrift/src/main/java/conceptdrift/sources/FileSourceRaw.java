@@ -35,8 +35,8 @@ public class FileSourceRaw implements SourceFunction<Transaction> {
                 double amount = Math.random() * 49 + 1;
                 String[] data = line.split(",");
 
-                long ingestionTime = Long.parseLong(data[1]) ;
-                long eventTimestamp = Long.parseLong(data[0]) ;
+                long ingestionTime = Long.parseLong(data[0]) ;
+                long eventTimestamp = Long.parseLong(data[1]) ;
 
                 transaction = new Transaction(1, ingestionTime, eventTimestamp, amount);
 
