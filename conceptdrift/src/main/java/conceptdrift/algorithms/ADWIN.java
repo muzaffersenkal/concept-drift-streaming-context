@@ -291,6 +291,7 @@ public class ADWIN extends AbstractDetectorAlgorithm {
 
     public void resetLearning() {
         blnBucketDeleted = false;
+        initBuckets();
     }
 
     public int getBucketsUsed() {

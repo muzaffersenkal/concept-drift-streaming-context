@@ -1,29 +1,12 @@
 package conceptdrift.test;
-
-/*
- *    Adwin.java
- *    Copyright (C) 2008 UPC-Barcelona Tech, Catalonia
- *    @author Albert Bifet
- *
- *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation; either version 2 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this program; if not, write to the Free Software
- *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
 import moa.core.SizeOf;
+import java.io.Serializable;
 
-public class ADWIN2 { //extends Estimator {
+public class ADWIN2  implements Serializable {
+    private static final long serialVersionUID = 8608494406245478110L; //extends Estimator {
 
-    private class List{
+    private class List implements Serializable{
+        private static final long serialVersionUID = 3967653422596868861L;
         protected int count;
         protected ListItem head;
         protected ListItem tail;
@@ -115,12 +98,13 @@ public class ADWIN2 { //extends Estimator {
 
     }
 
-    private class ListItem {
+    private class ListItem implements Serializable{
+        private static final long serialVersionUID = -2560667534786566381L;
         //		protected Object data;
         protected ListItem next;
         protected ListItem previous;
         protected int bucketSizeRow=0;
-        protected int MAXBUCKETS= ADWIN2.MAXBUCKETS;
+        protected int MAXBUCKETS=ADWIN2.MAXBUCKETS;
         protected double bucketTotal[]=new double[MAXBUCKETS+1];
         protected double bucketVariance[]=new double[MAXBUCKETS+1];
 
@@ -228,8 +212,6 @@ public class ADWIN2 { //extends Estimator {
 //		 containing the given value.
 		this(element, null);
 		}
-
-
 		public Object value() {
 //			 post: returns the element in this node
 			return this.data;
@@ -265,7 +247,10 @@ public class ADWIN2 { //extends Estimator {
 
     private List listRowBuckets;
     public boolean getChange(){return blnBucketDeleted;}
-    public void resetChange(){blnBucketDeleted=false;}
+    public void resetChange(){
+        blnBucketDeleted=false;
+        initBuckets();
+    }
     public int getBucketsUsed(){return BucketNumberMAX;}
     public int getWidth(){return WIDTH;}
     public void setClock(int intClock){mintClock=intClock;}
@@ -422,7 +407,7 @@ public class ADWIN2 { //extends Estimator {
                                 blnCutexpression(n0,n1,u0,u1,v0,v1,absvalue,delta) ){
                             blnBucketDeleted=true;
                             Detect=mintTime;
-
+                            System.out.println(Detect);
                             if (Detect==0) {
                                 Detect=mintTime;
                                 //blnFirst=true;
