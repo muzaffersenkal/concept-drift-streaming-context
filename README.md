@@ -1,6 +1,7 @@
 ## About The Project
 
-Numerous data-driven systems stream massive amounts of data at a high rate as a result of technological advancements. However, the data can change at any time, causing malfunctions and erroneous results. It is critical that these systems be able to adapt to these changes. The focus of this research is to investigate operating conditions in streaming contexts in presence of concept drift.
+Numerous data-driven systems stream massive amounts of data at a high rate as a result of technological advancements.  However, the data can change at any time, causing malfunctions and erroneous results. This is known as concept drift. These systems must be able to detect these changes. This research focuses on investigating operating conditions in streaming contexts in the presence of concept drift. Most common unsupervised concept drift algorithms were implemented on Apache Flink job and tried to detect concept drifts. 
+
 
 
 ## Getting Started
@@ -18,6 +19,8 @@ This is an example of how to list things you need to use the software and how to
 
 -   Python
 
+-   Jupyter Notebook
+
 ### Installation
 
 1.  Clone the repo
@@ -26,11 +29,53 @@ This is an example of how to list things you need to use the software and how to
     git clone https://github.com/muzaffersenkal/concept-drift-streaming-context
     ```
 
-2.  Run Backend
+2.  Generate Drift Data
 
 3.  Run Flink Job (DriftDetectJob)
 
 ## data
+
+# How to run the Experiment
+
+1. Generate Artificial Drift Data
+
+    ``` sh
+    python generate_drift_data.py
+    ```
+
+2. Run the Flink Job
+
+    ``` sh
+    ..
+    ```
+
+# How to run DriftViewer
+
+1.  Run the backend server ( FastAPI )
+
+    ``` sh
+    uvicorn server.main:app --reload
+    ```
+
+2. Run the Flink Job for DriftViewer
+
+    ``` sh
+    ..
+    ```
+
+
+
+## How to show the Experiment results
+
+After run the experiment,
+
+1. Run the Evaluation Python Script
+
+    ``` sh
+    python evaluate.py
+    ```
+
+
 
 
 ## Contributing
