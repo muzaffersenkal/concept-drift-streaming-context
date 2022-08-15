@@ -39,7 +39,7 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 	public void open(Configuration parameters) {
 		api = new ApiService();
 		if (algorithm.equals("ADWIN")){
-			detector = new ADWIN(0.002);
+				detector = new ADWIN(0.002);
 		} else if (algorithm.equals("GMADM")){
 			detector = new GeometricMovingAverageDM();
 		} else if (algorithm.equals("CUSUM")){
