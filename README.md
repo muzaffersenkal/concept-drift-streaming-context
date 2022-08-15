@@ -33,14 +33,13 @@ This is an example of how to list things you need to use the software and how to
 
 3.  Run Flink Job (DriftDetectJob)
 
-## data
 
-# How to run the Experiment
+## How to run the Experiment
 
 1. Generate Artificial Drift Data
 
     ``` sh
-    python generate_drift_data.py
+    python GenerateDriftData.py
     ```
 
 2. Run the Flink Job
@@ -49,7 +48,7 @@ This is an example of how to list things you need to use the software and how to
     ..
     ```
 
-# How to run DriftViewer
+## How to run DriftViewer
 
 1.  Run the backend server ( FastAPI )
 
