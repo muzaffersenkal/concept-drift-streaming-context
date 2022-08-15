@@ -1,7 +1,6 @@
 package conceptdrift;
 
 import conceptdrift.algorithms.*;
-import conceptdrift.test.ADWIN2;
 import conceptdrift.utils.ApiService;
 import conceptdrift.alert.Alert;
 import org.apache.flink.configuration.Configuration;
