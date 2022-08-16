@@ -36,7 +36,7 @@ public class DriftDetectContinuousJob {
 		boolean apiAlert = parameters.getBoolean("apiAlert",true);
 
 		env.setParallelism(1);
-		String dataURL  = "/Users/muzaffersenkal/Desktop/Dissertation/FlinkProject/conceptdrift/Data/output.csv";
+		String dataURL = parameters.get("input","/Users/muzaffersenkal/Desktop/Dissertation/FlinkProject/Data/output.csv");
 
 
 		DataStream<Transaction> transactions = env

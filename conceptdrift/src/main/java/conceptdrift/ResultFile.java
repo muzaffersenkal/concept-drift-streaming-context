@@ -7,11 +7,16 @@ import java.io.PrintWriter;
 
 public class ResultFile {
     PrintWriter out = null;
+    public String outputFolder;
+
+    public ResultFile(String outputFolder){
+        this.outputFolder = outputFolder;
+    }
 
 
     public void writeToFile(Transaction transaction, int index, String algorithm, String type){
         try {
-            out = new PrintWriter(new BufferedWriter(new FileWriter("Data/result/result_"+ type +"_"+algorithm+".csv", true)));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(outputFolder+"result_"+ type +"_"+algorithm+".csv", true)));
             out.println(String.valueOf(transaction.getIngestionTimestamp())+","+String.valueOf(transaction.getEventTimestamp())+","+String.valueOf(index)+","+algorithm);
         } catch (IOException e) {
             System.err.println(e);

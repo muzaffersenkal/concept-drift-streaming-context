@@ -35,9 +35,9 @@ public class DriftDetectJob {
 		ParameterTool parameters = ParameterTool.fromArgs(args);
 		String algorithm = parameters.get("algorithm","ADWIN");
 		boolean apiAlert = parameters.getBoolean("apiAlert",false);
-		boolean saveResult = parameters.getBoolean("saveResult",true);
 
-		String dataURL = parameters.get("input","/Users/muzaffersenkal/Desktop/Dissertation/FlinkProject/conceptdrift/Data/data_drift_20.csv");
+		String dataURL = parameters.get("input","/Users/muzaffersenkal/Desktop/Dissertation/FlinkProject/Data/data_drift_20.csv");
+		String outputFolder = parameters.get("output","/Users/muzaffersenkal/Desktop/Dissertation/FlinkProject/Result/");
 
 		env.setParallelism(1);
 		/* env.setRuntimeMode(RuntimeExecutionMode.STREAMING); */
@@ -49,7 +49,7 @@ public class DriftDetectJob {
 
 		DataStream<Alert> alerts = transactions
 				.keyBy(Transaction::getAccountId)
-				.process(new DriftDetector(apiAlert, algorithm, saveResult))
+				.process(new DriftDetector(apiAlert, algorithm, outputFolder))
 				.name("drift-detector");
 
 		alerts

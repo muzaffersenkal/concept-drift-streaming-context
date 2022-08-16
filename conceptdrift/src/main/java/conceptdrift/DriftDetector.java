@@ -10,7 +10,7 @@ import org.apache.flink.util.Collector;
 public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert> {
 
 	private boolean apiAlert = false;
-	private boolean saveResult = false;
+	private String outputFolder = "";
 	private static final long serialVersionUID = 1L;
 	private transient ApiService api;
 	private int index = 0;
@@ -27,10 +27,10 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 		this.algorithm = algorithm;
 	}
 
-	public DriftDetector(boolean apiAlert, String algorithm, boolean saveResult) {
+	public DriftDetector(boolean apiAlert, String algorithm, String outputFolder) {
 		this.apiAlert = apiAlert;
 		this.algorithm = algorithm;
-		this.saveResult = saveResult;
+		this.outputFolder = outputFolder;
 	}
 
 
@@ -49,7 +49,7 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 			detector = new DDM();
 		}
 
-		resultFile = new ResultFile();
+		resultFile = new ResultFile(this.outputFolder);
 
 		//System.out.println(parameters);
 	}
@@ -73,9 +73,8 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 				api.sendDrift(detector.name,transaction.getEventTimestamp(), transaction.getIngestionTimestamp());
 			}
 
-			if(saveResult){
-				resultFile.writeToFile(transaction, index, algorithm, "sudden");
-			}
+			resultFile.writeToFile(transaction, index, algorithm, "sudden");
+
 			// do not forget to reset detector
 			detector.resetLearning();
 		}
