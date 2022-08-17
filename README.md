@@ -25,9 +25,9 @@ This is an example of how to list things you need to use the software and how to
 
 1.  Clone the repo
 
-    ``` sh
-    git clone https://github.com/muzaffersenkal/concept-drift-streaming-context
-    ```
+``` sh
+git clone https://github.com/muzaffersenkal/concept-drift-streaming-context
+```
 2. Install Python
 
 3. Install Apache Flink
@@ -38,16 +38,16 @@ This is an example of how to list things you need to use the software and how to
 
 We have a script to generate drift data. You can run the script to get the data.
 
-    ``` sh
-    python GenerateDriftData.py 
-    ```
+``` sh
+python GenerateDriftData.py 
+```
 
 2. Run the Flink Job
 
-    ``` sh
-    $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectJob.jar --algorithm ADWIN --output Result/ --input Data/data_drift_20.csv
+```sh
+$FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectJob.jar --algorithm ADWIN --output Result/ --input Data/data_drift_20.csv
+```
 
-    ```
 ##### Parameters for DriftDetectJob
 
 **--algorithm:** drift detector algorithm
@@ -66,16 +66,16 @@ We have a script to generate drift data. You can run the script to get the data.
 
 1.  Run the DriftViewer ( FastAPI )
 
-    ``` sh
-    cd driftviewer
-    uvicorn main:app --reload
-    ```
+``` sh
+cd driftviewer
+uvicorn main:app --reload
+```
 
 2. Run the Flink Job for DriftViewer
 
-    ``` sh
-        $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectContinuousJob.jar --algorithm ADWIN 
-    ```
+```sh
+$FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectContinuousJob.jar --algorithm ADWIN 
+```
 
 
 
@@ -85,9 +85,11 @@ After run the experiment,
 
 1. Run the Evaluation Python Script
 
-    ``` sh
-    python evaluate.py
-    ```
+``` sh
+python Evaluate.py
+```
+
+The script will export a csv file to Result folder 
 
 
 
