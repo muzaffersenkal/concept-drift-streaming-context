@@ -45,7 +45,7 @@ public class DriftDetectContinuousJob {
 
 		DataStream<Alert> alerts = transactions
 				.keyBy(Transaction::getAccountId)
-				.process(new DriftDetector(apiAlert, algorithm))
+				.process(new DriftDetector(algorithm, apiAlert))
 				.name("drift-detector");
 
 		alerts

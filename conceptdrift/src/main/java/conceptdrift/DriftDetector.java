@@ -22,12 +22,12 @@ public class DriftDetector extends KeyedProcessFunction<Long, Transaction, Alert
 		this.algorithm = algorithm;
 	}
 
-	public DriftDetector(boolean apiAlert, String algorithm) {
+	public DriftDetector( String algorithm, boolean apiAlert) {
 		this.apiAlert = apiAlert;
 		this.algorithm = algorithm;
 	}
 
-	public DriftDetector(boolean apiAlert, String algorithm, String outputFolder) {
+	public DriftDetector(String algorithm, String outputFolder, boolean apiAlert) {
 		this.apiAlert = apiAlert;
 		this.algorithm = algorithm;
 		this.outputFolder = outputFolder;

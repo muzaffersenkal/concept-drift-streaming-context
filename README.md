@@ -28,38 +28,53 @@ This is an example of how to list things you need to use the software and how to
     ``` sh
     git clone https://github.com/muzaffersenkal/concept-drift-streaming-context
     ```
+2. Install Python
 
-2.  Generate Drift Data
-
-3.  Run Flink Job (DriftDetectJob)
-
+3. Install Apache Flink
 
 ## How to run the Experiment
 
-1. Generate Artificial Drift Data
+1. Provide Data
+
+We have a script to generate drift data. You can run the script to get the data.
 
     ``` sh
-    python GenerateDriftData.py
+    python GenerateDriftData.py 
     ```
 
 2. Run the Flink Job
 
     ``` sh
-    ..
+    $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectJob.jar --algorithm ADWIN --output Result/ --input Data/data_drift_20.csv
+
     ```
+##### Parameters for DriftDetectJob
+
+**--algorithm:** drift detector algorithm
+- ADWIN
+- CUSUM
+- GMADM
+- PageHinkley
+
+**--output:** result output folder
+
+**--input:** drift data
+
+
 
 ## How to run DriftViewer
 
-1.  Run the backend server ( FastAPI )
+1.  Run the DriftViewer ( FastAPI )
 
     ``` sh
-    uvicorn server.main:app --reload
+    cd driftviewer
+    uvicorn main:app --reload
     ```
 
 2. Run the Flink Job for DriftViewer
 
     ``` sh
-    ..
+        $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectContinuousJob.jar --algorithm ADWIN 
     ```
 
 
