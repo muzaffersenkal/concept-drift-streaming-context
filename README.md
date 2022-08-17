@@ -77,7 +77,7 @@ uvicorn main:app --reload
 $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectContinuousJob.jar --algorithm ADWIN 
 ```
 
-3. Then go to http://localhost:8080 on your browser
+3. Then go to http://localhost:8000 on your browser
 
 
 ## How to show the Experiment results
