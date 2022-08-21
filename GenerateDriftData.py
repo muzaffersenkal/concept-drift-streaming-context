@@ -166,7 +166,7 @@ df = generate_drift(driftNumber, totalSeconds, DIST_MEAN)
 # In[139]:
 
 
-df.to_csv(f"conceptdrift/Data/data_drift_{driftNumber}.csv",index=False,header=None)
+df.to_csv(f"Data/data_drift_{driftNumber}.csv",index=False,header=None)
 
 
 # In[ ]:
