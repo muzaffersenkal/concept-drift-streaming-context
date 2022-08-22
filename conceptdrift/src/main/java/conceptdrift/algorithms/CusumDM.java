@@ -40,6 +40,11 @@ public class CusumDM extends AbstractDetectorAlgorithm {
         resetLearning();
     }
 
+    public CusumDM(double lambdaOption ) {
+        this.lambdaOption = lambdaOption;
+        resetLearning();
+    }
+
     @Override
     public void resetLearning() {
         m_n = 1;

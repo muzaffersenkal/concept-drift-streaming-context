@@ -46,6 +46,17 @@ public class PageHinkleyDM extends AbstractDetectorAlgorithm {
         resetLearning();
     }
 
+    public PageHinkleyDM(double lambdaOption) {
+        this.lambdaOption = lambdaOption;
+        resetLearning();
+    }
+
+    public PageHinkleyDM(double lambdaOption, double deltaOption) {
+        this.lambdaOption = lambdaOption;
+        this.deltaOption = deltaOption;
+        resetLearning();
+    }
+
     @Override
     public void resetLearning() {
         m_n = 1;
