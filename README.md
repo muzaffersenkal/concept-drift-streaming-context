@@ -98,7 +98,7 @@ The script will export a csv file to Result folder
 
 
 
-## How to show  CUSUM and PageHinkley Parameter Optimization Result
+## How to show  CUSUM and PageHinkley Parameter Test Result
 
 There is a jupyter notebook file for to show the result called **Evaluate_ParameterResults.ipynb**
 
