@@ -81,7 +81,7 @@ $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectContinuou
 
 ## How to run Parameter Test
 
-We did not implement to flink job. We hava Java file to run this test called ParameterTest under test folder.
+We did not implement to flink job. We hava Java file to run this test called **ParameterTest.java** under test folder.
 You can run this file.
 
 ## How to show the Experiment results
