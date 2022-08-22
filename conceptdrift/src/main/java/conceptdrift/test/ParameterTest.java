@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTest {
+public class ParameterTest {
     private static final DecimalFormat df = new DecimalFormat("0.00");
     public static PrintWriter out = null;
     public String outputFolder;

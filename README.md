@@ -79,6 +79,10 @@ $FLINK_PATH/bin/flink run --jarfile ./conceptdrift/jarfiles/DriftDetectContinuou
 
 3. Then go to http://localhost:8000 on your browser
 
+## How to run Parameter Test
+
+We did not implement to flink job. We hava Java file to run this test called ParameterTest under test folder.
+You can run this file.
 
 ## How to show the Experiment results
 
@@ -92,6 +96,18 @@ python Evaluate.py
 
 The script will export a csv file to Result folder 
 
+
+
+## How to show  CUSUM and PageHinkley Parameter Optimization Result
+
+There is a jupyter notebook file for to show the result called **Evaluate_ParameterResults.ipynb**
+
+
+``` sh
+jupyter notebook
+```
+
+Then run Evaluate_ParameterResults.ipynb
 
 
 
